@@ -14,6 +14,7 @@
 }
 
 .container{
+  gap:10px;
   display: flex;
   flex-direction: column;
 }
@@ -36,20 +37,23 @@ img{
 .search{
   gap: 10px;
   display: flex;
+  justify-content: center;
   padding-bottom: 5px;
 }
 
 input{
-  width: 90%;
+  width: 40%;
   padding: 4px;
   border: 1px solid rgb(214, 214, 214);
 }
 
 .searchButton{
-  padding: 4px;
-  color: black;
+  padding: 8px;
+  color: white;
   font-size: 17px;
-  background-color: rgb(240, 240, 240);
+  cursor: pointer;
+  border: none;
+  background-color: rgb(109, 217, 253);
 }
 
 .massage{
