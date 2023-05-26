@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import './App.css';
 import { createContext } from 'react';
+import BasketsContainer from './components/BasketContainer';
 
+export let Context = createContext()
 
 function App() {
-  let Context = createContext()
   const [searchData, setSearchData] = useState([])
   const [inputValue, setInputValue] = useState('')
   const [keywords  ,setKeywords] = useState([])
@@ -75,6 +76,7 @@ function App() {
             })
          }
         </div>
+        <BasketsContainer/>
       </div>
     </Context.Provider>
     </div>
