@@ -10,9 +10,11 @@ function App() {
   const [inputValue, setInputValue] = useState('')
   const [keywords  ,setKeywords] = useState([])
   const [currentItem,setCurrentItem] = useState(null)
+  const [isShowMassage,setIsShowMassage] = useState(false)
   
-
+  
   const handleSearch = async(e) => {
+    setIsShowMassage(false)
     e.preventDefault();
     const tags = inputValue.split(' ')
     setKeywords(tags)
@@ -20,7 +22,7 @@ function App() {
     Promise.all(tags.map(tag => {
       return fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=432038f9a2f76cf4ff57cc1e679c08c6&tags=${tag}&per_page=5&page=1&format=json&nojsoncallback=1`)
      }))
-    .then(fetchResults => Promise.all(fetchResults.map(fetchResult => fetchResult.json()))).then(res => {
+    .then(Results => Promise.all(Results.map(Result => Result.json()))).then(res => {
       res.forEach((dataObj, index) => {
         const photos = dataObj.photos?.photo.map(photoObj => {
           return {
@@ -60,7 +62,7 @@ function App() {
           <button className='searchButton' disabled={inputValue.length === 0}>Search</button>
         </div>
       </form>
-    <Context.Provider value={{setSearchData,searchData,keywords,currentItem}}>
+    <Context.Provider value={{setSearchData,searchData,keywords,currentItem,setIsShowMassage}}>
       <div className='container'>
         <div className="photosContainer">
          {
@@ -75,6 +77,7 @@ function App() {
                     />
             })
          }
+         <div className={!isShowMassage?'massage':'active_massage'}>All photos sorted</div>
         </div>
         <BasketsContainer/>
       </div>

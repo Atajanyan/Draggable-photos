@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Context } from '../App'
 
 function Basket({keyword}) {
-    const {setSearchData,searchData,currentItem} = useContext(Context)
+    const {setSearchData,searchData,currentItem,setIsShowMassage} = useContext(Context)
     const [basket, setBasket] = useState([])
     const [isShow,setIsShow] = useState(false)
 
@@ -15,7 +15,7 @@ function Basket({keyword}) {
     function dragOverHandler(e){
         e.preventDefault()
         if(e.target.className === 'basketName'){
-          e.target.style.boxShadow = '0px -4px 3px yellow'
+          e.target.style.boxShadow = '0px -4px 3px blue'
         }
       }
     
@@ -33,8 +33,11 @@ function Basket({keyword}) {
         if(e.target.innerText === currentItem.tag){
             searchData.splice(currentIndex,1)
             setBasket(basket.concat(currentItem))
-           setSearchData(searchData.slice(0))
-          }    
+            setSearchData(searchData.slice(0))
+            if(!searchData.length){
+            setIsShowMassage(true)
+          } 
+          }   
         }
    
   return (
@@ -49,14 +52,12 @@ function Basket({keyword}) {
         >
          {keyword}
         </div>
-        <div className='bask'>
-           <div className='baskCont'>
+           <div className='basket'>
               {
               isShow?basket.map(e=><img key={e.id} src={e.url} alt={e.title}/>):''
               }
            </div>
         </div>
-      </div>
   )
 }
 
