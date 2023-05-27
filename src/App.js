@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { createContext } from 'react';
 import BasketsContainer from './components/BasketContainer';
@@ -11,10 +11,20 @@ function App() {
   const [keywords  ,setKeywords] = useState([])
   const [currentItem,setCurrentItem] = useState(null)
   const [isShowMassage,setIsShowMassage] = useState(false)
-  
-  
+  let massage = useRef(true)
+
+  useEffect(()=>{
+    if(massage.current){
+      massage.current = false
+    }else if(!searchData.length){
+        setIsShowMassage(true)
+      }else{
+        setIsShowMassage(false)
+      }
+  },[searchData])
+
+
   const handleSearch = async(e) => {
-    setIsShowMassage(false)
     e.preventDefault();
     const tags = inputValue.split(' ')
     setKeywords(tags)
@@ -26,7 +36,7 @@ function App() {
       res.forEach((dataObj, index) => {
         const photos = dataObj.photos?.photo.map(photoObj => {
           return {
-            id: photoObj.id,
+            id: photoObj.id+Math.random(),
             title: photoObj.title,
             url: `https://live.staticflickr.com/${photoObj.server}/${photoObj.id}_${photoObj.secret}.jpg`,
             tag: tags[index]
@@ -62,7 +72,7 @@ function App() {
           <button className='searchButton' disabled={inputValue.length === 0}>Search</button>
         </div>
       </form>
-    <Context.Provider value={{setSearchData,searchData,keywords,currentItem,setIsShowMassage}}>
+    <Context.Provider value={{setSearchData,searchData,keywords,currentItem}}>
       <div className='container'>
         <div className="photosContainer">
          {
