@@ -26,7 +26,7 @@ function App() {
 
   const handleSearch = async(e) => {
     e.preventDefault();
-    const tags = inputValue.trim().split(' ')
+    const tags = inputValue.trim().split(' ').filter(e=>e.trim().length>0);
     setKeywords(tags)
     const data = []
     Promise.all(tags.map(tag => {
