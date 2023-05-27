@@ -22,7 +22,6 @@
 .photosContainer{
   gap: 5px;
   padding: 5px;
-  cursor: grab;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -30,6 +29,7 @@
 }
 
 img{
+  cursor: grab;
   width: 100px;
   height: 100px;
 }
@@ -37,23 +37,28 @@ img{
 .search{
   gap: 10px;
   display: flex;
-  justify-content: center;
   padding-bottom: 5px;
+  justify-content: center;
 }
 
 input{
   width: 40%;
   padding: 4px;
+  font-size: 20px;
   border: 1px solid rgb(214, 214, 214);
 }
 
 .searchButton{
   padding: 8px;
-  color: white;
-  font-size: 17px;
-  cursor: pointer;
   border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 17px;
   background-color: rgb(109, 217, 253);
+}
+
+.searchButton:hover{
+  background-color: rgb(63, 202, 248);
 }
 
 .massage{
@@ -61,8 +66,8 @@ input{
 }
 
 .active_massage{
-  display: block;
   color: blue;
+  display: block;
   font-size: 40px;
   animation: massage .5s linear;
 

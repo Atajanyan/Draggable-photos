@@ -30,7 +30,11 @@ function Basket({keyword}) {
         e.target.style.boxShadow = 'none'
                 
         if(e.target.innerText === currentItem.tag){
-              setBasket(basket.concat(currentItem))
+            for(let key of searchData){
+                if(key.id === currentItem.id){
+                    setBasket(basket.concat(currentItem))
+                }
+            }
               setSearchData(searchData.filter(e=>e.id !== currentItem.id))
           }   
         }

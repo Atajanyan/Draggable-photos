@@ -10,8 +10,9 @@
     height: 100px;
     display: flex;
     color: white;
-    cursor: pointer;
     font-size: 50px;
+    cursor: pointer;
+    overflow: hidden;
     border-radius: 20px;
     align-items: center;
     justify-content: center;

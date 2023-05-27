@@ -11,6 +11,7 @@ function App() {
   const [keywords  ,setKeywords] = useState([])
   const [currentItem,setCurrentItem] = useState(null)
   const [isShowMassage,setIsShowMassage] = useState(false)
+  const [noSearchResults, setNoSearchResults] = useState(false);
   let massage = useRef(true)
 
   useEffect(()=>{
@@ -42,11 +43,15 @@ function App() {
             tag: tags[index]
           }
         })
-       data.push(...photos)
+        data.push(...photos)
       })
-      setSearchData(data.sort(() => 0.5 - Math.random()))
+      if (data.length) {
+        setNoSearchResults(false);
+      } else {
+        setNoSearchResults(true);
+      }
+      setSearchData(data.sort(() => Math.random() - 0.5))
      })
-
   }
 
   function dragStartHandler(e,item){
@@ -87,7 +92,7 @@ function App() {
                     />
             })
          }
-         <div className={!isShowMassage?'massage':'active_massage'}>All photos sorted</div>
+         {(noSearchResults && <div className={!noSearchResults ?'massage':'active_massage'}>No Search Result</div>)||<div className={!isShowMassage?'massage':'active_massage'}>All photos sorted</div>}
         </div>
         <BasketsContainer/>
       </div>
